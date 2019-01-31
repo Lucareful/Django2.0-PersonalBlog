@@ -1,0 +1,414 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title> Luenci的博客  </title>
+{% load static %}
+	<script src="{% static "/主页/js/jquery.min.js" %}"></script>
+	<link rel="stylesheet" href="{% static "/主页/css/calender.css" %}">
+	<style>
+		@import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600");
+		.more-pens {
+			position: fixed;
+			left: 20px;
+			bottom: 20px;
+			z-index: 10;
+			font-family: "Montserrat",serif;
+			font-size: 12px;
+		}
+
+		a.white-mode, a.white-mode:link, a.white-mode:visited, a.white-mode:active {
+			font-family: "Montserrat",serif;
+			font-size: 12px;
+			text-decoration: none;
+			background: #212121;
+			padding: 4px 8px;
+			color: #f7f7f7;
+		}
+		a.white-mode:hover, a.white-mode:link:hover, a.white-mode:visited:hover, a.white-mode:active:hover {
+			background: #edf3f8;
+			color: #212121;
+		}
+
+		body {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+			background: #000000;
+
+		}
+
+		.title {
+			z-index: 10;
+			position: absolute;
+			left: 50%;
+			top: 40%;
+			transform: translateX(-50%) translateY(-50%);
+			font-family: "Montserrat",serif;
+			text-align: center;
+			width: 65%;
+		}
+		.title h1 {
+			position: relative;
+			color: #EEEEEE;
+			font-weight: 600;
+			font-size: 60px;
+			padding: 0;
+			margin: 0;
+			line-height: 1;
+			text-shadow: 0 0 30px #000155;
+		}
+		.title h1 span {
+			font-weight: 600;
+			padding: 0;
+			margin: 0;
+			color: #BBB;
+		}
+		.title h3 {
+			font-weight: 200;
+			font-size: 20px;
+			padding: 0;
+			margin: 0;
+			line-height: 1;
+			color: #EEEEEE;
+			letter-spacing: 2px;
+			text-shadow: 0 0 30px #000155;
+		}
+		.title > hr{
+			width:60%;
+		}
+		.content{
+			width: 240px;
+			height: 160px;
+		}
+	</style>
+								<!--分界线-->
+	<style>
+		a {
+			text-decoration: none;
+		}
+		ul, ol, li {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		#demo {
+			width: 380px;
+			margin: 150px auto;
+		}
+		p {
+			margin: 0;
+		}
+		#dt {
+			margin: 30px auto;
+			height: 28px;
+			width: 200px;
+			padding: 0 6px;
+			border: 1px solid #ccc;
+			outline: none;
+		}
+
+		a {
+			text-decoration: none;
+		}
+		ul, ol, li {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		#demo {
+
+			width: 10px;
+			margin: 150px auto;
+		}
+		p {
+			margin: 0;
+		}
+		#dt {
+			margin: 30px auto;
+			height: 28px;
+			width: 200px;
+			padding: 0 6px;
+			border: 1px solid #ccc;
+			outline: none;
+		}
+	</style>
+</head>
+
+<!--图标样式-->
+<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="../static/主页/css/index.css" />
+
+<body>
+
+<div id="demo">
+	<div id="ca"></div>
+</div>
+
+<script src="../static/主页/js/jquery.js"></script>
+<script src="../static/主页/js/calendar.js"></script>
+<script>
+    $('#ca').calendar({
+        width: 380,
+        height: 380,
+        data: [
+            {
+                date: '2017/12/24',
+                value: 'Christmas Eve'
+            },
+            {
+                date: '2017/12/25',
+                value: 'Merry Christmas'
+            },
+            {
+                date: '2017/01/01',
+                value: 'Happy New Year'
+            }
+        ],
+        onSelected: function (view, date, data) {
+            console.log('view:' + view);
+            alert('date:' + date);
+            console.log('data:' + (data || 'None'));
+        }
+    });
+
+    $('#dd').calendar({
+        trigger: '#dt',
+        zIndex: 999,
+        format: 'yyyy-mm-dd',
+        onSelected: function (view, date, data) {
+            console.log('event: onSelected')
+        },
+        onClose: function (view, date, data) {
+            console.log('event: onClose');
+            console.log('view:' + view);
+            console.log('date:' + date);
+            console.log('data:' + (data || 'None'));
+        }
+    });
+</script>
+
+<div class="title" style="width: 900px;left:700px;top:50%;"">
+	<h1><em>Luenci Blogs</em></h1>
+	<div class="message" style="height: 350px;width: 900px">
+	<br>
+	<br>
+	<h3>精选内容 Article List</h3>
+	<div class="content">
+		{% for blog in blog_list %}
+		<h2>{{ blog.title }}</h2>
+		<br>
+		<p>{{ blog.body }}</p>
+		<p>{{ blog.timestamp }}</p>
+		{% endfor %}
+	</div>
+    </div>
+	<div class="content" style="height: 250px;width: 900px">
+		<h3 >关于我 About Me</h3>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="info" >
+			<p align="left">
+				&nbsp;&nbsp;<img src="../static/img/github.jpg" height="35px" width="35px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				我的Github:&nbsp;&nbsp;<a href="https://github.com/Lucareful" target="_blank">https://github.com/Lucareful</a>
+			</p>
+			<p align="left">
+				&nbsp;&nbsp;<img src="../static/img/C_Letter_256px_1121413_easyicon.net.png" height="35px" width="35px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				我的CSDN:&nbsp;&nbsp;<a href="https://blog.csdn.net/Luenci379" target="_blank">https://blog.csdn.net/Luenci379</a>
+			</p>
+			<p align="left">
+			&nbsp;&nbsp;<img src="../static/img/mail_632px_1140377_easyicon.net.png" height="35px" width="45px">&nbsp;&nbsp;&nbsp;&nbsp;
+			我的邮箱(Mail):&nbsp;&nbsp;luencer@163.com
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="s-side" style="height: 50% ;top: 10%;">
+	<ul>
+		<!--这部分是导航栏信息。-->
+		<li class="s-firstItem first">
+			<a href="#">
+				<i class="fa fa-home"></i>
+				<span>导航</span>
+			</a>
+		</li>
+
+		<li class="first">
+			<div class="d-firstNav s-firstNav clearfix">
+				<i class="fa fa-bars"></i>
+				<span>功能列表</span>
+				<i class="fa fa-caret-right fr "></i>
+			</div>
+			<ul class="d-firstDrop s-firstDrop">
+				<li>
+					<div class="d-secondNav s-secondNav">
+						<i class="fa fa-minus-square-o"></i>
+						<span>文章列表</span>
+						<i class="fa fa-caret-right fr"></i>
+					</div>
+
+					<ul class="d-secondDrop s-secondDrop">
+					{% for var in titles %}
+                    	{% if var.title %}
+                        <li class="s-thirdItem">
+                            <a href="Article/{{ var.id }}" target="_blank">
+                            {{ var.title }}
+                        	</a>
+						</li>
+						{% endif %}
+                    {% endfor %}
+                    </ul>
+
+				</li>
+				<li>
+					<div class="d-secondNav s-secondNav">
+						<i class="fa fa-minus-square-o"></i>
+						<span>小项目实验室</span>
+						<i class="fa fa-caret-right fr "></i>
+					</div>
+					<ul class="d-secondDrop s-secondDrop">
+						<li class="s-thirdItem">
+							<a href="#">开发中</a>
+						</li>
+					</ul>
+				</li>
+				<li class="s-secondItem">
+					<a href="#">
+						<i class="fa fa-minus-square-o"></i>
+						<span><a href="time.html">时光轴</a></span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li class="first">
+			<div class="d-firstNav s-firstNav">
+				<i class="fa fa-bars"></i>
+				<span>扩展功能和鸣谢</span>
+				<i class="fa fa-caret-right fr" ></i>
+			</div>
+			<ul class="d-firstDrop s-firstDrop">
+				<li class="s-secondItem">
+					<i class="fa fa-minus-square-o"></i>
+					<a href="https://music.163.com/" target="_blank">音乐播放器</a>
+				</li>
+				<li class="s-secondItem">
+					<i class="fa fa-minus-square-o"></i>
+					<a href="http://down.admin5.com/" target="_blank">网站素材提供</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<script>
+    'use strict';
+
+    function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+    var max_particles = 1000;
+
+    var tela = document.createElement('canvas');
+    tela.width = $(window).width();
+    tela.height = $(window).height();
+    $("body").append(tela);
+
+    var canvas = tela.getContext('2d');
+
+    var Particle = function () {
+        function Particle(canvas, progress) {
+            _classCallCheck(this, Particle);
+
+            var random = Math.random();
+            this.progress = 0;
+            this.canvas = canvas;
+
+            this.x = $(window).width() / 2 + (Math.random() * 200 - Math.random() * 200);
+            this.y = $(window).height() / 2 + (Math.random() * 200 - Math.random() * 200);
+
+            this.w = $(window).width();
+            this.h = $(window).height();
+            this.radius = random > .2 ? Math.random() : Math.random() * 3;
+            this.color = random > .2 ? "#d8002c" : "#F9314C";
+            this.radius = random > .8 ? Math.random() * 2 : this.radius;
+            this.color = random > .8 ? "#7DFFF2" : this.color;
+
+            // this.color  = random > .1 ? "#ffae00" : "#f0ff00" // Alien
+            this.variantx1 = Math.random() * 300;
+            this.variantx2 = Math.random() * 400;
+            this.varianty1 = Math.random() * 100;
+            this.varianty2 = Math.random() * 120;
+        }
+
+        Particle.prototype.render = function render() {
+            this.canvas.beginPath();
+            this.canvas.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+            this.canvas.lineWidth = 2;
+            this.canvas.fillStyle = this.color;
+            this.canvas.fill();
+            this.canvas.closePath();
+        };
+
+        Particle.prototype.move = function move() {
+            // this.x += (Math.sin(this.progress/this.variantx1)*Math.cos(this.progress/this.variantx2));
+            // this.y += (Math.sin(this.progress/this.varianty1)*Math.cos(this.progress/this.varianty2));
+            this.x += Math.sin(this.progress / this.variantx1) * Math.cos(this.progress / this.variantx2);
+            this.y += Math.cos(this.progress / this.varianty2);
+
+            if (this.x < 0 || this.x > this.w - this.radius) {
+                return false;
+            }
+
+            if (this.y < 0 || this.y > this.h - this.radius) {
+                return false;
+            }
+            this.render();
+            this.progress++;
+            return true;
+        };
+
+        return Particle;
+    }();
+
+    var particles = [];
+    var init_num = popolate(max_particles);
+
+    function popolate(num) {
+        for (var i = 0; i < num; i++) {
+            setTimeout(function () {
+                particles.push(new Particle(canvas, i));
+            }.bind(this), i * 20);
+        }
+        return particles.length;
+    }
+
+    function clear() {
+        canvas.globalAlpha = 0.05;
+        canvas.fillStyle = '#000';
+        canvas.fillRect(0, 0, tela.width, tela.height);
+        canvas.globalAlpha = 1;
+    }
+
+    function update() {
+        particles = particles.filter(function (p) {
+            return p.move();
+        });
+        if (particles.length < init_num) {
+            popolate(1);
+        }
+        clear();
+        requestAnimationFrame(update.bind(this));
+    }
+    update();
+</script>
+
+<script type="text/javascript" src="../static/主页/js/jquery.min.js"></script>
+<script type="text/javascript" src="../static/主页/js/index.js" ></script>
+
+</body>
+</html>
