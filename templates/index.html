@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <title> Luenci的博客  </title>
-	<script src="../static/主页/js/jquery.min.js"></script>
-	<link rel="stylesheet" href="../static/主页/css/calender.css">
+{% load static %}
+	<script src="{% static "/主页/js/jquery.min.js" %}"></script>
+	<link rel="stylesheet" href="{% static "/主页/css/calender.css" %}">
 	<style>
 		@import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600");
 		.more-pens {
